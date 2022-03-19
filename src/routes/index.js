@@ -3,10 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
- const name = req.query["name"];
-
- res.send(`Ola ${name || "coloque seu nome na variavel name"}`);
+    res.status(302).location("/openAPI/swagger.html").send();
 });
-
 
 module.exports = router;

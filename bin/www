@@ -4,15 +4,15 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const { log }  = require('../components/logger');
+const app = require('../src/app');
+const { log }  = require('../src/components/logger');
 const http = require('http');
 
 /**
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || '3000');
+const port = normalizePort(process.env.PORT || '8083');
 app.set('port', port);
 
 /**

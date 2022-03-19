@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www --ignore __tests__",
+    "test": "NODE_ENV=test jest",
     "db-migrate": "db-migrate --migrations-dir ./migrations"
   },
   "dependencies": {
@@ -16,9 +18,11 @@
     "knex": "^0.95.11",
     "morgan": "~1.9.1",
     "pg": "^8.7.1",
+    "pg-mem": "^2.3.3",
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "jest": "^27.5.1",
     "nodemon": "^2.0.14"
   }
 }
