@@ -1,22 +1,6 @@
-'use strict';
 
-var dbm;
-var type;
-var seed;
-
-/**
-  * We receive the dbmigrate dependency from dbmigrate initially.
-  * This enables us to not have to rely on NODE_PATH.
-  */
-exports.setup = function(options, seedLink) {
-  dbm = options.dbmigrate;
-  type = dbm.dataType;
-  seed = seedLink;
-};
-
-exports.up = function (db, callback) {
-  db.runSql(
-    `
+exports.up = function(knex) {
+ return knex.raw(`
     CREATE TABLE book_language
     (
         id character varying(10) NOT NULL,
@@ -85,25 +69,29 @@ exports.up = function (db, callback) {
             ON DELETE CASCADE
     );
     
-   `,
-    callback,
-  );
+   `);
+
+
+   /* return knex.schema
+    .createTable('book_language', function (table) {
+       table.increments('id');
+       table.string('id', 10).notNullable();
+       table.string('last_name', 255).notNullable();
+    })
+    .createTable('products', function (table) {
+       table.increments('id');
+       table.decimal('price').notNullable();
+       table.string('name', 1000).notNullable();
+    });*/
 };
 
-exports.down = function (db, callback) {
-  db.runSql(
-    `
-    DROP TABLE book_language_relationship;
-    DROP TABLE book_author_relationship;
-    DROP TABLE book;
-    DROP TABLE book_author;
-    DROP TABLE book_publisher;
-    DROP TABLE book_language;
-        `,
-    callback,
-  );
-};
-
-exports._meta = {
-  "version": 1
+exports.down = function(knex) {
+  return knex.raw( `
+  DROP TABLE book_language_relationship;
+  DROP TABLE book_author_relationship;
+  DROP TABLE book;
+  DROP TABLE book_author;
+  DROP TABLE book_publisher;
+  DROP TABLE book_language;
+      `);
 };

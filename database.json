@@ -5,5 +5,9 @@
       "password": "mysecretpassword",
       "host": "localhost",
       "database": "migration"
+    },
+    "test": {
+      "driver": "sqlite3",
+      "filename": ":memory:"
     }
   }

@@ -5,13 +5,11 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www --ignore __tests__",
-    "test": "NODE_ENV=test jest",
-    "db-migrate": "db-migrate --migrations-dir ./migrations"
+    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "db-migrate": "knex migrate:latest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
-    "db-migrate": "^1.0.0-beta.16",
-    "db-migrate-pg": "^1.2.2",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
