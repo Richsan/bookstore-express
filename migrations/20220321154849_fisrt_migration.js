@@ -1,6 +1,7 @@
+exports.up = function (knex) {
+    return knex.raw(`
 
-exports.up = function(knex) {
- return knex.raw(`
+    DELETE FROM knex_migrations_lock WHERE is_locked = 1;
     CREATE TABLE book_language
     (
         id character varying(10) NOT NULL,
@@ -72,21 +73,21 @@ exports.up = function(knex) {
    `);
 
 
-   /* return knex.schema
-    .createTable('book_language', function (table) {
-       table.increments('id');
-       table.string('id', 10).notNullable();
-       table.string('last_name', 255).notNullable();
-    })
-    .createTable('products', function (table) {
-       table.increments('id');
-       table.decimal('price').notNullable();
-       table.string('name', 1000).notNullable();
-    });*/
+    /* return knex.schema
+     .createTable('book_language', function (table) {
+        table.increments('id');
+        table.string('id', 10).notNullable();
+        table.string('last_name', 255).notNullable();
+     })
+     .createTable('products', function (table) {
+        table.increments('id');
+        table.decimal('price').notNullable();
+        table.string('name', 1000).notNullable();
+     });*/
 };
 
-exports.down = function(knex) {
-  return knex.raw( `
+exports.down = function (knex) {
+    return knex.raw(`
   DROP TABLE book_language_relationship;
   DROP TABLE book_author_relationship;
   DROP TABLE book;
