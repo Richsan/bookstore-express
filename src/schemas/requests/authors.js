@@ -1,3 +1,5 @@
+const validator = require('validator');
+
 const postAuthorRequest = {
     name: {
         in: ['body'],
@@ -6,6 +8,18 @@ const postAuthorRequest = {
         },
         escape: {
 
+        },
+        custom: {
+            options: (value, {
+                req,
+                location,
+                path
+            }) => {
+                return validator.isAlpha(value, 'pt-BR', {
+                    ignore: ' .-'
+                });
+            },
+            errorMessage: 'name should have only alphabetic characters'
         },
         isLength: {
             options: {

@@ -94,8 +94,30 @@ describe('Author endpoints', () => {
         expect(res.statusCode).toEqual(400);
         expect(res.body).toMatchObject({
             errors: [{
+                    'param': 'name',
+                    'msg': 'name should have only alphabetic characters'
+                },
+                {
+                    'param': 'name',
+                    'msg': "name can't have more than 50 characters nor less than 2 characters"
+                }
+            ]
+        });
+    });
+
+    it('should return 400 when author\'s name has non alphabetic characters', async () => {
+        const res = await request(app)
+            .post('/authors')
+            .send({
+                name: '@#$%¨&',
+                citation_name: 'J.K.',
+                biography: 'Harry Potter\'s author',
+            });
+        expect(res.statusCode).toEqual(400);
+        expect(res.body).toMatchObject({
+            errors: [{
                 'param': 'name',
-                'msg': 'name can\'t have more than 50 characters nor less than 2 characters'
+                'msg': 'name should have only alphabetic characters'
             }]
         });
     });
